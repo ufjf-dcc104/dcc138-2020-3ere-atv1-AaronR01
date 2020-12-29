@@ -7,6 +7,29 @@
 </head>
 <body>
     <h1>DCC138 Aula Canvas</h1>
-    
+    <canvas></canvas>
+    <p>Por Aaron Ramires (2020)</p>
+    <script>
+        let canvas = document.querySelector("canvas")
+        let ctx = canvas.getContext("2d")
+        let x = 100;
+        let y = 100
+
+        canvas.height = 400;
+        canvas.width = 200
+
+        desenhaQuadrado()
+
+        function limpa(){
+            ctx.fillStyle = "black"
+            ctx.fillRect(0,0,canvas.width,canvas.height)
+        }
+        function desenhaQuadrado(){
+            limpa();
+            ctx.fillStyle = "white"
+            ctx.fillRect(x,y,10,10)
+        }
+
+    </script>
 </body>
 </html>
