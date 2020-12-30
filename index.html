@@ -18,8 +18,9 @@
         let dt;
         let fps;
         let aux = 0;
-        canvas.height = 400;
-        canvas.width = 200
+        canvas.height = 800;
+        canvas.width = 800
+        let rad =0
 
         requestAnimationFrame(desenhaQuadrado);
             
@@ -27,20 +28,39 @@
         //sejam mais simples de implementar ou até pra outros menus
         function limpa()
         {
-
+            
             ctx.fillStyle = "black"
             ctx.fillRect(0,0,canvas.width,canvas.height)
             ctx.fillStyle = "white"
         }
         function desenhaQuadrado(t)
         {
+            rad=rad+0.2;
             //usando Fps em vez de dt que acho mais facil pra pensar no conceito
                 t0 = t0 ?? t
                 fps = 1000/(t - t0)
             
 
             limpa();
-            
+            // checagem se desenho esta dentro do canvas ainda
+            // aconteceu comportamento estranho enquanto redimensionava a janela ai adicionei essa checagem
+            if(x<0){x=0;aux=6}
+            if(x>canvas.width)x=canvas.width;
+            if(y<0)y=0
+            if(y>canvas.height)y=canvas.height;
+
+
+
+            //Movimentação do quadrado
+           
+            x=x+(10)/fps
+            x=x+(Math.cos(rad%360)*500/fps);
+            y=y+(Math.sin(rad%360)*500/fps);
+
+
+
+
+            //Impressão do Quadrado
             ctx.fillStyle = "white"
             ctx.fillRect(x,y,10,10)
 
