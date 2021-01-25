@@ -13,7 +13,11 @@
         let canvas = document.querySelector("canvas")
         let ctx = canvas.getContext("2d")
         let x = 100;
-        let y = 100
+        let y = 100;
+        let vx = 200;
+        let vy = 0;
+        let charY = 10
+        let charX = 10
         let t0;
         let dt;
         let fps;
@@ -44,25 +48,42 @@
             limpa();
             // checagem se desenho esta dentro do canvas ainda
             // aconteceu comportamento estranho enquanto redimensionava a janela ai adicionei essa checagem
-            if(x<0){x=0;aux=6}
-            if(x>canvas.width)x=canvas.width;
-            if(y<0)y=0
-            if(y>canvas.height)y=canvas.height;
+            if(x<0)
+            {
+                x=0;
+                vx=-(vx-1)
+            }
+            if(x>(canvas.width-charX))
+            {
+                x=canvas.width-charX;
+                vx=-(vx-1)
+            }
+            if(y<0)
+            {
+                y=0;
+                vy=-(vy-1)
+            }
+
+            if(y>canvas.height-charY)
+            {
+                y=canvas.height-charY;
+                vy=-(vy-1)
+            }
 
 
-
-            //Movimentação do quadrado
+            //Controle da Dinamica
            
-            x=x+(10)/fps
-            x=x+(Math.cos(rad%360)*500/fps);
-            y=y+(Math.sin(rad%360)*500/fps);
+            x=x+vx/fps
+            y=y+vy/fps
+        
+            //y=y+(Math.sin(rad%360)*500/fps);
 
 
 
 
             //Impressão do Quadrado
             ctx.fillStyle = "white"
-            ctx.fillRect(x,y,10,10)
+            ctx.fillRect(x,y,charX,charY)
 
 
             //usando aux para checar alguns valores de teste
@@ -75,6 +96,14 @@
 
             requestAnimationFrame(desenhaQuadrado);
             t0=t;
+            
+        }
+
+        addEventListener("keydown",teclaPressionada)
+
+        function teclaPressionada(event) {
+            console.log(event.key);
+            
         }
 
     </script>
